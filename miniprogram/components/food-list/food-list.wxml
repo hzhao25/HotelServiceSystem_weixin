@@ -1,0 +1,95 @@
+<view class="container">
+  <!-- 菜品列表 -->
+  <view class="food-list">
+    <view class="food-item" wx:for="{{dishList}}" wx:key="id">
+      <image class="food-image" src="{{item.image}}" mode="aspectFill" catchtap="showFlavorPopup" data-dish="{{item}}"></image>
+      <view class="food-info">
+        <view class="food-name" catchtap="showFlavorPopup" data-dish="{{item}}">{{item.name}}</view>
+        <view class="food-category">{{item.category}}</view>
+        <view class="food-description">{{item.description}}</view>
+        <view class="food-bottom">
+          <view class="food-price">¥{{item.price}}</view>
+          <view class="food-action">
+            <view class="minus" wx:if="{{item.count > 0}}" bindtap="minusCount" data-id="{{item.id}}">-</view>
+            <view class="count" wx:if="{{item.count > 0}}">{{item.count}}</view>
+            <view class="plus" bindtap="addCount" data-id="{{item.id}}">+</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 购物车 -->
+  <view class="cart-bar" wx:if="{{totalCount > 0}}">
+    <view class="cart-info" bindtap="showOrderDetail">
+      <view class="total-price">¥{{totalPrice}}</view>
+      <view class="total-count">共{{totalCount}}件</view>
+    </view>
+    <view class="submit-btn" bindtap="submitOrder">提交订单</view>
+  </view>
+
+  <!-- 订单详情弹窗 -->
+  <view class="order-detail-popup" wx:if="{{showOrderDetail}}">
+    <view class="popup-mask" bindtap="hideOrderDetail"></view>
+    <view class="popup-content">
+      <view class="popup-header">
+        <text class="popup-title">订单详情</text>
+        <text class="popup-close" bindtap="hideOrderDetail">×</text>
+      </view>
+      <scroll-view class="popup-body" scroll-y>
+        <view class="order-item" wx:for="{{dishList}}" wx:key="id" wx:if="{{item.count > 0}}">
+          <view class="order-item-header">
+            <text class="order-item-name">{{item.name}}</text>
+            <text class="order-item-count">x{{item.count}}</text>
+          </view>
+          <view class="order-item-price">¥{{item.price * item.count}}</view>
+          <view class="order-item-flavors" wx:if="{{item.selectedFlavorList && item.selectedFlavorList.length > 0}}">
+            <view class="flavor-item" wx:for="{{item.selectedFlavorList}}" wx:key="id">
+              <text class="flavor-label">{{item.name}}:</text>
+              <text class="flavor-value">{{item.value}}</text>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+      <view class="popup-footer">
+        <view class="order-total">
+          <text>总计：</text>
+          <text class="total-price">¥{{totalPrice}}</text>
+        </view>
+        <button class="confirm-btn" bindtap="hideOrderDetail">确定</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 口味选择弹窗 -->
+  <view class="flavor-popup" wx:if="{{showFlavorPopup}}">
+    <view class="popup-mask" bindtap="hideFlavorPopup"></view>
+    <view class="popup-content">
+      <view class="popup-header">
+        <text class="popup-title">选择口味</text>
+        <text class="popup-close" bindtap="hideFlavorPopup">×</text>
+      </view>
+      <scroll-view class="popup-body" scroll-y>
+        <view class="flavor-section" wx:for="{{currentDish.flavors}}" wx:key="id">
+          <view class="flavor-name">{{item.name}}</view>
+          <view class="flavor-options">
+            <view 
+              class="flavor-option {{selectedFlavors[item.id] === option ? 'selected' : ''}}" 
+              wx:for="{{item.value}}" 
+              wx:for-item="option" 
+              wx:key="*this"
+              bindtap="selectFlavor"
+              data-flavor-id="{{item.id}}"
+              data-option="{{option}}"
+            >
+              {{option}}
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+      <view class="popup-footer">
+        <button class="confirm-btn" bindtap="confirmFlavor">确定</button>
+      </view>
+    </view>
+  </view>
+</view> 

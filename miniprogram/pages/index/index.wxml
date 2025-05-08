@@ -1,0 +1,78 @@
+<view class="container">
+  <!-- 头部区域 -->
+  <view class="header">
+    <view class="logo-section">
+      <image class="logo" src="{{logoUrl}}" mode="aspectFit" binderror="onLogoError"></image>
+      <view class="hotel-info">
+        <view class="hotel-name">酒店客房服务</view>
+        <view class="hotel-detail">
+          <view>地址：北京市朝阳区建国路88号</view>
+          <view>服务时间：06:00 - 22:00</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 侧边栏 -->
+  <view class="sidebar">
+    <!-- 服务模块 -->
+    <view class="menu-item {{activeMenu === 'service' ? 'active' : ''}} {{isEmployee ? 'disabled' : ''}}" bindtap="switchMenu" data-menu="service">
+      <image class="menu-icon" src="/assets/iconfont/服务.png" mode="aspectFit"></image>
+      <text class="menu-text">服务</text>
+    </view>
+    <view class="submenu" wx:if="{{activeMenu === 'service'}}">
+      <view class="submenu-item {{activeSubmenu === 'clean' ? 'active' : ''}} {{isEmployee ? 'disabled' : ''}}" bindtap="switchSubmenu" data-submenu="clean">
+        <image class="submenu-icon" src="/assets/iconfont/清洁.png" mode="aspectFit"></image>
+        <text class="submenu-text">清洁</text>
+      </view>
+      <view class="submenu-item {{activeSubmenu === 'repair' ? 'active' : ''}} {{isEmployee ? 'disabled' : ''}}" bindtap="switchSubmenu" data-submenu="repair">
+        <image class="submenu-icon" src="/assets/iconfont/修理.png" mode="aspectFit"></image>
+        <text class="submenu-text">修理</text>
+      </view>
+      <!-- <view class="submenu-item {{activeSubmenu === 'dnd' ? 'active' : ''}} {{isEmployee ? 'disabled' : ''}}" bindtap="switchSubmenu" data-submenu="dnd">
+        <image class="submenu-icon" src="/assets/iconfont/免打扰.png" mode="aspectFit"></image>
+        <text class="submenu-text">免打扰</text>
+      </view>
+      <view class="submenu-item {{activeSubmenu === 'wakeup' ? 'active' : ''}} {{isEmployee ? 'disabled' : ''}}" bindtap="switchSubmenu" data-submenu="wakeup">
+        <image class="submenu-icon" src="/assets/iconfont/叫醒.png" mode="aspectFit"></image>
+        <text class="submenu-text">叫醒</text>
+      </view> -->
+    </view>
+
+    <!-- 送货模块 -->
+    <view class="menu-item {{activeMenu === 'delivery' ? 'active' : ''}} {{isEmployee ? 'disabled' : ''}}" bindtap="switchMenu" data-menu="delivery">
+      <image class="menu-icon" src="/assets/iconfont/送货.png" mode="aspectFit"></image>
+      <text class="menu-text">送货</text>
+    </view>
+    <view class="submenu" wx:if="{{activeMenu === 'delivery'}}">
+      <view class="submenu-item {{activeSubmenu === 'food' ? 'active' : ''}} {{isEmployee ? 'disabled' : ''}}" bindtap="switchSubmenu" data-submenu="food">
+        <image class="submenu-icon" src="/assets/iconfont/菜品选定.png" mode="aspectFit"></image>
+        <text class="submenu-text">菜品选定</text>
+      </view>
+      <view class="submenu-item {{activeSubmenu === 'goods' ? 'active' : ''}} {{isEmployee ? 'disabled' : ''}}" bindtap="switchSubmenu" data-submenu="goods">
+        <image class="submenu-icon" src="/assets/iconfont/商品购买.png" mode="aspectFit"></image>
+        <text class="submenu-text">商品购买</text>
+      </view>
+      <view class="submenu-item {{activeSubmenu === 'supplies' ? 'active' : ''}} {{isEmployee ? 'disabled' : ''}}" bindtap="switchSubmenu" data-submenu="supplies">
+        <image class="submenu-icon" src="/assets/iconfont/消耗品补充.png" mode="aspectFit"></image>
+        <text class="submenu-text">消耗品补充</text>
+      </view>
+    </view>
+
+    <!-- 紧急呼叫模块 -->
+    <!-- <view class="menu-item {{activeMenu === 'emergency' ? 'active' : ''}}" bindtap="switchMenu" data-menu="emergency">
+      <image class="menu-icon" src="/assets/iconfont/紧急呼叫.png" mode="aspectFit"></image>
+      <text class="menu-text">紧急呼叫</text>
+    </view> -->
+  </view>
+
+  <!-- 内容区域 -->
+  <view class="content">
+    <food-list wx:if="{{currentSubContent === 'food'}}" />
+    <consume-list wx:if="{{currentSubContent === 'supplies'}}" />
+    <product-list wx:if="{{currentSubContent === 'goods'}}" />
+    <service-form wx:if="{{currentSubContent === 'clean'}}" />
+    <service-form wx:if="{{currentSubContent === 'repair'}}" />
+    <!-- 其它内容可按需添加 -->
+  </view>
+</view>

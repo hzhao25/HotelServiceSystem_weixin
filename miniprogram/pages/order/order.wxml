@@ -1,0 +1,22 @@
+<view class="order-list-container">
+  <block wx:if="{{orderList.length > 0}}">
+    <block wx:for="{{orderList}}" wx:key="id">
+      <view class="order-item" bindtap="goOrderDetail" data-order="{{encodeURIComponent(JSON.stringify(item))}}">
+        <image class="order-img" src="{{item.image}}" mode="aspectFill" />
+        <view class="order-info">
+          <view class="order-type">{{item.type}}</view>
+          <view class="order-desc">{{item.description}}</view>
+          <view class="order-time">预约：{{item.bookTime}}</view>
+          <view class="order-status">{{item.status}}</view>
+        </view>
+      </view>
+      <!-- 仅用户页面显示按钮 -->
+      <view wx:if="{{role === 'user'}}" class="order-btns">
+        <button wx:if="{{item.status === '已完成' || item.status === '完成'}}" class="btn-evaluate" bindtap="goEvaluate" data-id="{{item.id}}" data-order="{{item}}">去评价</button>
+        <button wx:if="{{item.status === '未接单'}}" class="btn-cancel" bindtap="cancelOrder" data-id="{{item.id}}">取消订单</button>
+        <!-- <button wx:if="{{item.status === '已评价'}}" class="btn-evaluated" disabled="true">已评价</button> -->
+      </view>
+    </block>
+  </block>
+  <view wx:else class="empty">暂无订单</view>
+</view> 

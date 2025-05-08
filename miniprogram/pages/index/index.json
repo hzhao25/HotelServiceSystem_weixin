@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "food-list": "/components/food-list/food-list",
+    "consume-list": "/components/consume-list/consume-list",
+    "product-list": "/components/product-list/product-list",
+    "service-form": "/components/service-form/service-form"
+  }
+} 

@@ -1,0 +1,12 @@
+<view class="order-detail-container">
+  <image class="order-img" src="{{order.image}}" mode="aspectFill" />
+  <view class="order-type">类型：{{order.type}}</view>
+  <view class="order-desc">内容：{{order.description}}</view>
+  <view class="order-time">预约时间：{{order.bookTime}}</view>
+  <view class="order-completed" wx:if="{{order.completedTime}}">完成时间：{{order.completedTime}}</view>
+  <view class="order-price">金额：¥{{order.price}}</view>
+  <view class="order-status">状态：{{order.status}}</view>
+  <view class="order-emergency">紧急程度：{{order.emergency == 0 ? '紧急' : '正常'}}</view>
+  <view class="order-room" wx:if="{{order.roomId}}">房间号：{{order.roomId}}</view>
+  <view class="order-staff" wx:if="{{order.staffId}}">员工ID：{{order.staffId}}</view>
+</view> 

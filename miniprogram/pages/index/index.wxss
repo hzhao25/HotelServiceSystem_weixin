@@ -1,0 +1,168 @@
+/* 主题颜色 */
+:root {
+  --primary-color: #4CAF50;
+  --secondary-color: #2E7D32;
+  --text-color: #333333;
+  --light-text: #666666;
+  --background-color: #F5F5F5;
+  --white: #FFFFFF;
+}
+
+/* 页面容器 */
+.container {
+  min-height: 100vh;
+  background-color: var(--background-color);
+  padding-top: 180rpx; /* 为头部留出空间 */
+  padding-bottom: 100rpx; /* 为底部导航栏留出空间 */
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 头部区域 */
+.header {
+  background-color: rgb(150,184,105);
+  padding: 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.logo {
+  width: 100rpx;
+  height: 100rpx;
+  margin-right: 30rpx;
+}
+
+.hotel-info {
+  flex: 1;
+}
+
+.hotel-name {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: var(--white);
+  margin-bottom: 15rpx;
+}
+
+.hotel-detail {
+  font-size: 28rpx;
+  color: var(--white);
+}
+
+/* 侧边栏 */
+.sidebar {
+  width: 278rpx; /* 增加侧边栏宽度 */
+  background-color: var(--white);
+  position: fixed;
+  left: -5px;
+  top: 212rpx;
+  bottom: 0;
+  box-shadow: 2rpx 0 10rpx rgba(0, 0, 0, 0.1);
+}
+
+.menu-item {
+  padding: 30rpx 20rpx;
+  border-bottom: 1rpx solid #EEEEEE;
+  position: relative;
+  margin-bottom: 10rpx;
+  font-size: 32rpx;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.menu-icon {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+
+.menu-text {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis; /* 文字过长时显示省略号 */
+}
+
+.menu-item.active {
+  background-color: rgb(76, 175, 80);
+  color: var(--white);
+}
+
+.submenu {
+  background-color: #F9F9F9;
+  padding-left: 0;
+}
+
+.submenu-item {
+  padding: 25rpx 20rpx;
+  border-bottom: 1rpx solid #EEEEEE;
+  font-size: 25rpx;
+  color: var(--light-text);
+  margin-bottom: 8rpx;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  padding-left: 80rpx;
+}
+
+.submenu-icon {
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+
+.submenu-text {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0; /* 确保文字可以正确显示省略号 */
+}
+
+.submenu-item.active {
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+/* 禁用状态样式 */
+.menu-item.disabled,
+.submenu-item.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+  background-color: #f5f5f5;
+}
+
+.menu-item.disabled .menu-text,
+.submenu-item.disabled .submenu-text {
+  color: #999;
+}
+
+.menu-item.disabled .menu-icon,
+.submenu-item.disabled .submenu-icon {
+  opacity: 0.5;
+}
+
+/* 内容区域 */
+.content {
+  margin-left: 280rpx; /* 调整内容区域的左边距，与侧边栏宽度对应 */
+  padding: 20rpx;
+  min-height: calc(100vh - 280rpx - 100rpx); /* 减去头部和底部导航栏的高度 */
+  background-color: #F5F5F5;
+  flex: 1;
+  overflow-y: auto;
+  box-sizing: border-box;
+  width: calc(100% - 280rpx); /* 确保内容区域宽度正确 */
+}

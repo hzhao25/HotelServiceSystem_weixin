@@ -1,0 +1,53 @@
+<view class="container">
+  <!-- 消耗品列表 -->
+  <view class="consume-list">
+    <view class="consume-item" wx:for="{{consumeList}}" wx:key="id">
+      <image class="consume-image" src="{{item.image}}" mode="aspectFill"></image>
+      <view class="consume-info">
+        <view class="consume-name">{{item.name}}</view>
+        <view class="consume-stock">库存: {{item.stock}}</view>
+        <view class="consume-bottom">
+          <view class="consume-action">
+            <view class="minus" wx:if="{{item.count > 0}}" bindtap="minusCount" data-id="{{item.id}}">-</view>
+            <view class="count" wx:if="{{item.count > 0}}">{{item.count}}</view>
+            <view class="plus" bindtap="addCount" data-id="{{item.id}}">+</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 购物车 -->
+  <view class="cart-bar" wx:if="{{totalCount > 0}}">
+    <view class="cart-info" bindtap="showOrderDetail">
+      <view class="total-count">共{{totalCount}}件</view>
+    </view>
+    <view class="submit-btn" bindtap="submitOrder">提交订单</view>
+  </view>
+
+  <!-- 订单详情弹窗 -->
+  <view class="order-detail-popup" wx:if="{{showOrderDetail}}">
+    <view class="popup-mask" bindtap="hideOrderDetail"></view>
+    <view class="popup-content">
+      <view class="popup-header">
+        <text class="popup-title">订单详情</text>
+        <text class="popup-close" bindtap="hideOrderDetail">×</text>
+      </view>
+      <scroll-view class="popup-body" scroll-y>
+        <view class="order-item" wx:for="{{consumeList}}" wx:key="id" wx:if="{{item.count > 0}}">
+          <view class="order-item-header">
+            <text class="order-item-name">{{item.name}}</text>
+            <text class="order-item-count">x{{item.count}}</text>
+          </view>
+        </view>
+      </scroll-view>
+      <view class="popup-footer">
+        <view class="order-total">
+          <text>总计：</text>
+          <text class="total-count">{{totalCount}}件</text>
+        </view>
+        <button class="confirm-btn" bindtap="hideOrderDetail">确定</button>
+      </view>
+    </view>
+  </view>
+</view> 

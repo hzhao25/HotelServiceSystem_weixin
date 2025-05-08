@@ -1,0 +1,19 @@
+<view class="container">
+  <view class="rating-section">
+    <text class="section-title">服务评分</text>
+    <view class="stars">
+      <view class="star {{rating >= 1 ? 'active' : ''}}" bindtap="setRating" data-rating="1">★</view>
+      <view class="star {{rating >= 2 ? 'active' : ''}}" bindtap="setRating" data-rating="2">★</view>
+      <view class="star {{rating >= 3 ? 'active' : ''}}" bindtap="setRating" data-rating="3">★</view>
+      <view class="star {{rating >= 4 ? 'active' : ''}}" bindtap="setRating" data-rating="4">★</view>
+      <view class="star {{rating >= 5 ? 'active' : ''}}" bindtap="setRating" data-rating="5">★</view>
+    </view>
+  </view>
+
+  <view class="comment-section">
+    <text class="section-title">评价内容</text>
+    <textarea class="comment-input" placeholder="请输入您的评价内容" bindinput="onCommentInput" value="{{comment}}"></textarea>
+  </view>
+
+  <button class="submit-btn" bindtap="submitReview">提交评价</button>
+</view> 

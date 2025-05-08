@@ -1,0 +1,43 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/login/login",
+    "pages/order/order",
+    "pages/mine/mine",
+    "pages/checkout/checkout",
+    "pages/evaluate/evaluate",
+    "pages/my-reviews/my-reviews",
+    "pages/user-reviews/user-reviews",
+    "pages/product-checkout/product-checkout"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "酒店客房服务",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#4CAF50",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "assets/iconfont/首页.png",
+        "selectedIconPath": "assets/iconfont/首页.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "assets/iconfont/user.png",
+        "selectedIconPath": "assets/iconfont/user.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "componentFramework": "glass-easel",
+  "lazyCodeLoading": "requiredComponents",
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,28 @@
+<view class="reviews-container">
+  <view class="header">
+    <text class="title">我的评价</text>
+  </view>
+
+  <view class="review-list">
+    <block wx:if="{{reviewList.length > 0}}">
+      <view class="review-item" wx:for="{{reviewList}}" wx:key="id">
+        <view class="review-top">
+          <text class="review-type">{{item.type}}</text>
+          <text class="review-time">{{item.createdAt}}</text>
+        </view>
+        <view class="review-rating">
+          <text class="rating-text">评分：</text>
+          <view class="stars">
+            <text class="star {{item.rating >= 1 ? 'active' : ''}}">★</text>
+            <text class="star {{item.rating >= 2 ? 'active' : ''}}">★</text>
+            <text class="star {{item.rating >= 3 ? 'active' : ''}}">★</text>
+            <text class="star {{item.rating >= 4 ? 'active' : ''}}">★</text>
+            <text class="star {{item.rating >= 5 ? 'active' : ''}}">★</text>
+          </view>
+        </view>
+        <view class="review-comment">{{item.comment}}</view>
+      </view>
+    </block>
+    <view wx:else class="empty-review">暂无评价</view>
+  </view>
+</view> 

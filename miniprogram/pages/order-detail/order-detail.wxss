@@ -1,0 +1,28 @@
+.order-detail-container {
+  padding: 40rpx 20rpx;
+  background: #f7f7f7;
+  min-height: 100vh;
+}
+.order-img {
+  width: 100%;
+  height: 300rpx;
+  border-radius: 20rpx;
+  margin-bottom: 30rpx;
+  object-fit: cover;
+}
+.order-type, .order-desc, .order-time, .order-completed, .order-price, .order-status, .order-emergency, .order-room, .order-staff {
+  font-size: 30rpx;
+  color: #333;
+  margin-bottom: 18rpx;
+}
+.order-status {
+  color: #4CAF50;
+  font-weight: bold;
+}
+.order-price {
+  color: #FF4D4F;
+  font-weight: bold;
+}
+.order-emergency {
+  color: #FF9800;
+} 

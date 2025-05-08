@@ -1,0 +1,120 @@
+<view class="container">
+  <!-- 顶部导航栏 -->
+  <view class="header">
+    <text class="title">登录</text>
+  </view>
+  
+  <!-- 主要内容区域 -->
+  <view class="main-content">
+    <!-- 欢迎区域 -->
+    <view class="welcome-section">
+      <image src="{{logoUrl}}" class="logo" mode="aspectFit"></image>
+      <text class="welcome-text">请选择您的身份进行登录</text>
+    </view>
+    
+    <!-- 身份选择区域 -->
+    <view class="identity-section">
+      <view class="grid-container">
+        <view 
+          class="identity-card {{userType === 'employee' ? 'selected' : ''}}"
+          bindtap="selectUserType"
+          data-type="employee"
+        >
+          <view class="icon-container">
+            <image src="/assets/iconfont/user.png" class="identity-icon" mode="aspectFit"></image>
+          </view>
+          <text class="identity-text">我是员工</text>
+        </view>
+        
+        <view 
+          class="identity-card {{userType === 'customer' ? 'selected' : ''}}"
+          bindtap="selectUserType"
+          data-type="customer"
+        >
+          <view class="icon-container">
+            <image src="/assets/iconfont/user.png" class="identity-icon" mode="aspectFit"></image>
+          </view>
+          <text class="identity-text">我是用户</text>
+        </view>
+      </view>
+    </view>
+    
+    <!-- 员工登录表单 -->
+    <view class="login-form" wx:if="{{userType === 'employee'}}">
+      <form bindsubmit="handleLogin">
+        <view class="input-group">
+          <view class="input-container">
+            <image src="/assets/iconfont/用户名.png" class="input-icon" mode="aspectFit" style="width: 20px; height: 20px;"></image>
+            <input 
+              type="text" 
+              name="username"
+              placeholder="请输入用户名"
+              value="{{username}}"
+              class="input-field"
+            />
+          </view>
+        </view>
+        
+        <view class="input-group">
+          <view class="input-container">
+            <text class="iconfont icon-lock input-icon"></text>
+            <image src="/assets/iconfont/密码.png" class="input-icon" mode="aspectFit" style="width: 20px; height: 20px;"></image>
+            <input 
+              type="{{showPassword ? 'text' : 'password'}}"
+              name="password"
+              placeholder="请输入密码"
+              value="{{password}}"
+              class="input-field"
+            />
+            <text 
+              class="iconfont {{showPassword ? 'icon-eye' : 'icon-eye-slash'}} password-toggle"
+              bindtap="togglePasswordVisibility"
+            ></text>
+          </view>
+        </view>
+        
+        <button 
+          class="login-button"
+          form-type="submit"
+          disabled="{{isLoading}}"
+        >
+          <text wx:if="{{isLoading}}" class="loading-icon"></text>
+          {{isLoading ? '登录中...' : '登录'}}
+        </button>
+        
+        <view class="remember-section">
+          <checkbox-group bindchange="handleRememberMe">
+            <checkbox value="remember" checked="{{rememberMe}}">记住我</checkbox>
+          </checkbox-group>
+          <text class="forget-password">忘记密码？</text>
+        </view>
+      </form>
+    </view>
+    
+    <!-- 用户登录区域 -->
+    <view class="wechat-login" wx:if="{{userType === 'customer'}}">
+      <button class="wechat-button" bindtap="handleWechatLogin">
+        <text class="iconfont icon-wechat"></text>
+        微信一键登录
+      </button>
+    </view>
+    
+    <!-- 错误提示 -->
+    <view class="error-message" wx:if="{{errorMessage}}">
+      <text class="iconfont icon-warning"></text>
+      {{errorMessage}}
+    </view>
+  </view>
+  
+  <!-- 底部标签栏
+  <view class="tab-bar">
+    <view class="tab-item">
+      <text class="iconfont icon-service"></text>
+      <text class="tab-text">服务</text>
+    </view>
+    <view class="tab-item">
+      <text class="iconfont icon-user-circle"></text>
+      <text class="tab-text">我的</text>
+    </view>
+  </view> -->
+</view> 

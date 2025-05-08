@@ -1,0 +1,60 @@
+<view class="checkout-container">
+  <!-- 订单信息 -->
+  <view class="order-info">
+    <view class="section-title">订单信息</view>
+    <view class="order-items">
+      <view class="order-item" wx:for="{{orderItems}}" wx:key="id">
+        <image class="item-image" src="{{item.image}}" mode="aspectFill"></image>
+        <view class="item-info">
+          <view class="item-name">{{item.name}}</view>
+          <view class="item-detail">
+            <text class="item-count">x{{item.count}}</text>
+            <text class="item-price">¥{{item.price}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 订单金额 -->
+  <view class="order-amount">
+    <view class="amount-item">
+      <text>商品总额</text>
+      <text>¥{{totalAmount}}</text>
+    </view>
+    <view class="amount-item">
+      <text>配送费</text>
+      <text>¥0</text>
+    </view>
+    <view class="amount-item total">
+      <text>实付金额</text>
+      <text class="price">¥{{totalAmount}}</text>
+    </view>
+  </view>
+
+  <!-- 送达时间选择 -->
+  <view class="delivery-time">
+    <view class="section-title">预约送达时间</view>
+    <picker mode="time" value="{{deliveryTime}}" start="{{startTime}}" end="{{endTime}}" bindchange="onTimeChange">
+      <view class="time-picker">
+        <text>{{deliveryTime || '请选择送达时间'}}</text>
+        <text class="arrow">></text>
+      </view>
+    </picker>
+  </view>
+
+  <!-- 支付按钮 -->
+  <view class="payment-section">
+    <button class="pay-button" bindtap="handlePayment">去支付</button>
+  </view>
+
+  <!-- 自定义支付密码弹窗 -->
+  <view wx:if="{{showPwdModal}}" class="modal-mask">
+    <view class="modal-box">
+      <view class="modal-title">请输入支付密码</view>
+      <input class="modal-input" type="password" value="123456" password maxlength="6" disabled />
+      <button class="modal-btn" bindtap="confirmPwdModal">确认支付</button>
+      <view class="modal-close" bindtap="closePwdModal">×</view>
+    </view>
+  </view>
+</view> 

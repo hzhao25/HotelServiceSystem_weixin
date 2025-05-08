@@ -1,0 +1,209 @@
+.checkout-container {
+  min-height: 100vh;
+  background-color: #F5F5F5;
+  padding: 20rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+/* 订单信息 */
+.order-info {
+  background-color: #FFFFFF;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.order-items {
+  margin-top: 20rpx;
+}
+
+.order-item {
+  display: flex;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #EEEEEE;
+}
+
+.order-item:last-child {
+  border-bottom: none;
+}
+
+.item-image {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 10rpx;
+  margin-right: 20rpx;
+}
+
+.item-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.item-name {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.item-detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item-count {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.item-price {
+  font-size: 28rpx;
+  color: rgb(76, 175, 80);
+  font-weight: bold;
+}
+
+/* 送达时间 */
+.delivery-time {
+  background-color: #FFFFFF;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.time-picker {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 0;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.arrow {
+  color: #999;
+}
+
+/* 订单金额 */
+.order-amount {
+  background-color: #FFFFFF;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.amount-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+  font-size: 28rpx;
+  color: #666;
+}
+
+.amount-item.total {
+  margin-top: 20rpx;
+  padding-top: 20rpx;
+  border-top: 1rpx solid #EEEEEE;
+  color: #333;
+  font-weight: bold;
+}
+
+.amount-item.total .price {
+  color: rgb(76, 175, 80);
+  font-size: 32rpx;
+}
+
+/* 支付按钮 */
+.payment-section {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20rpx;
+    background-color: #FFFFFF;
+    box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.1);
+  }
+  
+  .pay-button {
+    width: 100%;
+    height: 88rpx;
+    line-height: 88rpx;
+    text-align: center;
+    background-color: #4CAF50;
+    color: #FFFFFF;
+    font-size: 36rpx;
+    font-weight: bold;
+    border-radius: 44rpx;
+    border: none;
+  }
+  
+  .pay-button:active {
+    opacity: 0.8;
+  }
+  
+  .modal-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-box {
+    background: #fff;
+    border-radius: 20rpx;
+    padding: 60rpx 40rpx 40rpx 40rpx;
+    width: 80vw;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .modal-title {
+    font-size: 32rpx;
+    font-weight: bold;
+    margin-bottom: 40rpx;
+    color: #333;
+  }
+  .modal-input {
+    width: 320rpx;
+    height: 60rpx;
+    font-size: 36rpx;
+    text-align: center;
+    border: 1rpx solid #ddd;
+    border-radius: 10rpx;
+    margin-bottom: 40rpx;
+    letter-spacing: 16rpx;
+    background: #f7f7f7;
+  }
+  .modal-btn {
+    width: 100%;
+    height: 80rpx;
+    background: #4CAF50;
+    color: #fff;
+    font-size: 32rpx;
+    border-radius: 40rpx;
+    border: none;
+    font-weight: bold;
+    margin-bottom: 10rpx;
+  }
+  .modal-close {
+    position: absolute;
+    top: 20rpx;
+    right: 30rpx;
+    font-size: 40rpx;
+    color: #bbb;
+    font-weight: bold;
+    line-height: 1;
+  } 

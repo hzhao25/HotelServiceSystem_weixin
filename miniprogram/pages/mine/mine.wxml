@@ -1,0 +1,77 @@
+<view class="mine-container">
+  <!-- 顶部导航栏 -->
+  <view class="header">
+    <text class="title">我的</text>
+  </view>
+
+  <!-- 用户信息卡片 -->
+  <view class="user-card">
+    <view class="avatar-section">
+      <image class="avatar" src="/assets/iconfont/user.png" mode="aspectFit"></image>
+    </view>
+    <view wx:if="{{userInfo}}" class="user-info">
+      <view class="info-item" wx:if="{{userInfo.type === 'employee'}}">
+        <text class="label">用户名：</text>
+        <text class="value">{{userInfo.username}}</text>
+      </view>
+      <view class="info-item" wx:if="{{userInfo.type === 'employee'}}">
+        <text class="label">姓名：</text>
+        <text class="value">{{userInfo.name}}</text>
+      </view>
+      <view class="info-item" wx:if="{{userInfo.type === 'customer'}}">
+        <text class="label">id: </text>
+        <text class="value">{{userInfo.id}}</text>
+      </view>
+      <view class="info-item">
+        <text class="label">身份：</text>
+        <text class="value">{{userInfo.type === 'employee' ? '员工' : '用户'}}</text>
+      </view>
+      <view class="info-item" wx:if="{{userInfo.type === 'employee'}}">
+        <text class="label">评分：</text>
+        <view class="rating-value">
+          <text class="value">{{averageRating}}</text>
+          <view class="stars">
+            <text class="star {{averageRating >= 1 ? 'active' : ''}}">★</text>
+            <text class="star {{averageRating >= 2 ? 'active' : ''}}">★</text>
+            <text class="star {{averageRating >= 3 ? 'active' : ''}}">★</text>
+            <text class="star {{averageRating >= 4 ? 'active' : ''}}">★</text>
+            <text class="star {{averageRating >= 5 ? 'active' : ''}}">★</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view wx:else class="not-login">
+      <text>请先登录</text>
+      <navigator url="/pages/login/login" class="login-btn">去登录</navigator>
+    </view>
+  </view>
+
+  <!-- 功能列表 -->
+  <view class="function-list">
+    <view class="function-item" bindtap="navigateToOrders">
+      <image class="icon" src="/assets/iconfont/订单.png" mode="aspectFit"></image>
+      <text class="text">我的订单</text>
+      <text class="arrow">></text>
+    </view>
+    <view class="function-item" wx:if="{{userInfo.type === 'employee'}}" bindtap="navigateToReviews">
+      <image class="icon" src="/assets/iconfont/评价.png" mode="aspectFit"></image>
+      <text class="text">我的评价</text>
+      <text class="arrow">></text>
+    </view>
+    <view class="function-item" wx:if="{{userInfo.type === 'customer'}}" bindtap="navigateToUserReviews">
+      <image class="icon" src="/assets/iconfont/评价.png" mode="aspectFit"></image>
+      <text class="text">我的评价</text>
+      <text class="arrow">></text>
+    </view>
+    <view class="function-item">
+      <image class="icon" src="/assets/iconfont/设置.png" mode="aspectFit"></image>
+      <text class="text">设置</text>
+      <text class="arrow">></text>
+    </view>
+  </view>
+
+  <!-- 退出登录按钮 -->
+  <view class="logout-section" wx:if="{{userInfo}}">
+    <button class="logout-btn" bindtap="handleLogout">退出登录</button>
+  </view>
+</view> 

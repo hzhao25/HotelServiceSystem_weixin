@@ -1,0 +1,57 @@
+<view class="service-container">
+  <!-- 服务描述 -->
+  <view class="form-item">
+    <view class="form-label">{{serviceType}}描述</view>
+    <textarea class="description-input" 
+              placeholder="请描述需要{{serviceType}}的具体位置和要求" 
+              value="{{description}}"
+              bindinput="onDescriptionInput">
+    </textarea>
+  </view>
+
+  <!-- 预约时间 -->
+  <view class="form-item">
+    <view class="form-label">预约时间(几点前到达)</view>
+    <picker mode="time" 
+            value="{{bookTime}}" 
+            start="06:00" 
+            end="22:00" 
+            bindchange="onTimeChange">
+      <view class="time-picker">
+        <text>{{bookTime || '请选择预约时间'}}</text>
+        <text class="arrow">></text>
+      </view>
+    </picker>
+  </view>
+
+  <!-- 图片上传 -->
+  <view class="form-item">
+    <view class="form-label">现场图片</view>
+    <view class="image-uploader" bindtap="chooseImage" wx:if="{{!imageUrl}}">
+      <text class="upload-icon">+</text>
+      <text class="upload-text">上传图片</text>
+    </view>
+    <view class="image-preview" wx:else>
+      <image src="{{imageUrl}}" mode="aspectFill"></image>
+      <view class="delete-btn" catchtap="deleteImage">×</view>
+    </view>
+  </view>
+
+  <!-- 紧急程度 -->
+  <view class="form-item">
+    <view class="form-label">紧急程度</view>
+    <radio-group class="emergency-group" bindchange="onEmergencyChange">
+      <label class="radio-item">
+        <radio value="1" checked="{{emergency === 1}}"/>正常
+      </label>
+      <label class="radio-item">
+        <radio value="0" checked="{{emergency === 0}}"/>紧急
+      </label>
+    </radio-group>
+  </view>
+
+  <!-- 提交按钮 -->
+  <view class="submit-section">
+    <button class="submit-btn" bindtap="submitOrder">提交订单</button>
+  </view>
+</view> 
