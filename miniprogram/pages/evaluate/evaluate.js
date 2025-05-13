@@ -71,7 +71,7 @@ Page({
         if (res.data.code === 1) {
           // 评价成功后，更新订单状态为已评价
           wx.request({
-            url: 'http://localhost:8080/user/order/cancel/已评价',
+            url: 'http://localhost:8080/user/order/updateStatus/已评价',
             method: 'POST',
             data: {
               id: this.data.orderId

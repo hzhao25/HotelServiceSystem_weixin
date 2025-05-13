@@ -16,6 +16,11 @@
         <button wx:if="{{item.status === '未接单'}}" class="btn-cancel" bindtap="cancelOrder" data-id="{{item.id}}">取消订单</button>
         <!-- <button wx:if="{{item.status === '已评价'}}" class="btn-evaluated" disabled="true">已评价</button> -->
       </view>
+      
+      <!-- 员工页面按钮 -->
+      <view wx:if="{{role === 'staff'}}" class="order-btns">
+        <button wx:if="{{item.status === '已接单'}}" class="btn-complete" bindtap="completeOrder" data-id="{{item.id}}">订单完成</button>
+      </view>
     </block>
   </block>
   <view wx:else class="empty">暂无订单</view>

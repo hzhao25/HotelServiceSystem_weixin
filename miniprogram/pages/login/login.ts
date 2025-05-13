@@ -9,7 +9,17 @@ Page({
     showPassword: false,
     isLoading: false,
     errorMessage: '',
-    logoUrl: 'https://readdy.ai/api/search-image?query=luxury%20hotel%20logo%20design%2C%20minimalist%2C%20green%20and%20gold%20color%20scheme%2C%20elegant%20geometric%20shapes%2C%20hospitality%20symbol%2C%20hotel%20service%20icon%2C%20professional%20branding%2C%20isolated%20on%20white%20background%2C%20centered%20composition%2C%20high%20quality%203D%20rendering&width=200&height=200&seq=logo123&orientation=squarish'
+    logoUrl: 'https://readdy.ai/api/search-image?query=luxury%20hotel%20logo%20design%2C%20minimalist%2C%20green%20and%20gold%20color%20scheme%2C%20elegant%20geometric%20shapes%2C%20hospitality%20symbol%2C%20hotel%20service%20icon%2C%20professional%20branding%2C%20isolated%20on%20white%20background%2C%20centered%20composition%2C%20high%20quality%203D%20rendering&width=200&height=200&seq=logo123&orientation=squarish',
+    // 忘记密码相关数据
+    showForgetPasswordModal: false,
+    forgetPasswordStep: 1,
+    forgetPhone: '',
+    verificationCode: '',
+    actualVerificationCode: '', // 实际从服务器获取的验证码
+    oldPassword: '',
+    newPassword: '',
+    confirmPassword: '',
+    forgetPasswordError: ''
   },
 
   // 选择用户类型
@@ -181,6 +191,196 @@ Page({
             icon: 'none'
           });
         }
+      }
+    });
+  },
+
+  // ==== 忘记密码模块 ====
+  
+  // 显示忘记密码模态框
+  showForgetPasswordModal() {
+    this.setData({
+      showForgetPasswordModal: true,
+      forgetPasswordStep: 1,
+      forgetPhone: '',
+      verificationCode: '',
+      actualVerificationCode: '',
+      oldPassword: '',
+      newPassword: '',
+      confirmPassword: '',
+      forgetPasswordError: ''
+    });
+  },
+  
+  // 隐藏忘记密码模态框
+  hideForgetPasswordModal() {
+    this.setData({
+      showForgetPasswordModal: false
+    });
+  },
+  
+  // 输入手机号
+  inputForgetPhone(e: WechatMiniprogram.Input) {
+    this.setData({
+      forgetPhone: e.detail.value
+    });
+  },
+  
+  // 获取验证码
+  getVerificationCode() {
+    if (!this.data.forgetPhone || this.data.forgetPhone.length !== 11) {
+      this.setData({
+        forgetPasswordError: '请输入有效的手机号'
+      });
+      return;
+    }
+    
+    // 显示加载中
+    wx.showLoading({
+      title: '获取验证码中...',
+      mask: true
+    });
+    
+    // 调用后端接口获取验证码
+    wx.request({
+      url: 'http://localhost:8080/user/employee/code',
+      method: 'GET',
+      header: {
+        'content-type': 'application/json'
+      },
+      success: (res: any) => {
+        console.log('验证码接口返回数据:', res.data);
+        if (res.data && res.data.code === 1) {
+          // 获取验证码成功
+          console.log('获取到的验证码:', res.data.data);
+          this.setData({
+            actualVerificationCode: res.data.data,
+            forgetPasswordStep: 2,
+            forgetPasswordError: ''
+          });
+          
+          wx.showToast({
+            title: '验证码已发送',
+            icon: 'success'
+          });
+        } else {
+          this.setData({
+            forgetPasswordError: res.data.msg || '获取验证码失败'
+          });
+        }
+      },
+      fail: () => {
+        this.setData({
+          forgetPasswordError: '网络错误，请稍后重试'
+        });
+      },
+      complete: () => {
+        wx.hideLoading();
+      }
+    });
+  },
+  
+  // 输入验证码
+  inputVerificationCode(e: WechatMiniprogram.Input) {
+    this.setData({
+      verificationCode: e.detail.value
+    });
+  },
+  
+  // 验证验证码
+  verifyCode() {
+    if (!this.data.verificationCode) {
+      this.setData({
+        forgetPasswordError: '请输入验证码'
+      });
+      return;
+    }
+    
+    // 验证验证码是否正确
+    if (this.data.verificationCode === this.data.actualVerificationCode) {
+      this.setData({
+        forgetPasswordStep: 3,
+        forgetPasswordError: ''
+      });
+    } else {
+      this.setData({
+        forgetPasswordError: '验证码错误，请重新输入'
+      });
+    }
+  },
+  
+  // 输入旧密码
+  inputOldPassword(e: WechatMiniprogram.Input) {
+    this.setData({
+      oldPassword: e.detail.value
+    });
+  },
+  
+  // 输入新密码
+  inputNewPassword(e: WechatMiniprogram.Input) {
+    this.setData({
+      newPassword: e.detail.value
+    });
+  },
+  
+  // 确认新密码
+  inputConfirmPassword(e: WechatMiniprogram.Input) {
+    this.setData({
+      confirmPassword: e.detail.value
+    });
+  },
+  
+  // 重置密码
+  resetPassword() {
+    // 验证密码是否一致
+    if (this.data.newPassword !== this.data.confirmPassword) {
+      this.setData({
+        forgetPasswordError: '两次输入的密码不一致'
+      });
+      return;
+    }
+    
+    // 显示加载中
+    wx.showLoading({
+      title: '重置密码中...',
+      mask: true
+    });
+    
+    // 调用后端接口重置密码
+    wx.request({
+      url: 'http://localhost:8080/user/employee/forget',
+      method: 'PUT',
+      data: {
+        phone: this.data.forgetPhone,
+        oldPassword: this.data.oldPassword,
+        newPassword: this.data.newPassword
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: (res: any) => {
+        if (res.data && res.data.code === 1) {
+          // 重置密码成功
+          wx.showToast({
+            title: '密码重置成功',
+            icon: 'success'
+          });
+          
+          // 隐藏模态框
+          this.hideForgetPasswordModal();
+        } else {
+          this.setData({
+            forgetPasswordError: res.data.msg || '密码重置失败'
+          });
+        }
+      },
+      fail: () => {
+        this.setData({
+          forgetPasswordError: '网络错误，请稍后重试'
+        });
+      },
+      complete: () => {
+        wx.hideLoading();
       }
     });
   }

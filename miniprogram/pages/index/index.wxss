@@ -53,11 +53,63 @@
   font-weight: bold;
   color: var(--white);
   margin-bottom: 15rpx;
+  display: flex;
+  align-items: center;
+}
+
+/* 打烊标签 */
+.closed-tag {
+  font-size: 24rpx;
+  background-color: #FF4D4F;
+  color: white;
+  padding: 4rpx 12rpx;
+  border-radius: 10rpx;
+  margin-left: 16rpx;
+  font-weight: normal;
 }
 
 .hotel-detail {
   font-size: 28rpx;
   color: var(--white);
+}
+
+/* 打烊通知 */
+.shop-closed-notice {
+  background-color: #FFF1F0;
+  border: 1px solid #FFA39E;
+  border-radius: 12rpx;
+  padding: 32rpx;
+  margin: 30rpx 20rpx;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.closed-icon {
+  width: 80rpx;
+  height: 80rpx;
+  background-color: #FF4D4F;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60rpx;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+}
+
+.closed-message {
+  font-size: 36rpx;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 12rpx;
+}
+
+.closed-submessage {
+  font-size: 28rpx;
+  color: #666;
 }
 
 /* 侧边栏 */

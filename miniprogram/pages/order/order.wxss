@@ -146,4 +146,15 @@
   height: 64rpx;
   line-height: 64rpx;
   border: none;
+}
+
+.btn-complete {
+  background: #1890FF;
+  color: #fff;
+  font-size: 28rpx;
+  border-radius: 32rpx;
+  padding: 0 36rpx;
+  height: 64rpx;
+  line-height: 64rpx;
+  border: none;
 } 

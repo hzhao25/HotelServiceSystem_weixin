@@ -82,7 +82,7 @@ Page({
       success: (res) => {
         if (res.confirm) {
           wx.request({
-            url: 'http://localhost:8080/user/order/cancel/已取消',
+            url: 'http://localhost:8080/user/order/updateStatus/已取消',
             method: 'POST',
             data: {
               id: orderId
@@ -101,6 +101,52 @@ Page({
             },
             fail: () => {
               wx.showToast({ title: '网络错误', icon: 'none' });
+            }
+          });
+        }
+      }
+    });
+  },
+
+  // 完成订单
+  completeOrder(e) {
+    const orderId = e.currentTarget.dataset.id;
+    const token = wx.getStorageSync('token');
+    
+    wx.showModal({
+      title: '提示',
+      content: '确认已完成该订单吗？',
+      success: (res) => {
+        if (res.confirm) {
+          wx.request({
+            url: 'http://localhost:8080/user/order/updateStatus/已完成',
+            method: 'POST',
+            data: {
+              id: orderId
+            },
+            header: {
+              'content-type': 'application/x-www-form-urlencoded',
+              'authentication': token
+            },
+            success: (resp) => {
+              if (resp.data && resp.data.code === 1) {
+                wx.showToast({ 
+                  title: '订单已完成', 
+                  icon: 'success' 
+                });
+                this.fetchOrderList();
+              } else {
+                wx.showToast({ 
+                  title: resp.data.msg || '操作失败', 
+                  icon: 'none' 
+                });
+              }
+            },
+            fail: () => {
+              wx.showToast({ 
+                title: '网络错误', 
+                icon: 'none' 
+              });
             }
           });
         }

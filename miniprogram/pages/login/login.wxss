@@ -248,16 +248,100 @@
 .loading-icon {
   display: inline-block;
   width: 16px;
-  height: 16px;
-  border: 2px solid #fff;
-  border-radius: 50%;
-  border-top-color: transparent;
-  animation: spin 1s linear infinite;
-  margin-right: 8px;
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+/* 忘记密码模态框样式 */
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  width: 85%;
+  max-width: 320px;
+  background-color: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  position: relative;
+  z-index: 1001;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.modal-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.modal-close {
+  font-size: 22px;
+  color: #999;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.modal-body {
+  padding: 16px;
+}
+
+.modal-error {
+  padding: 0 16px 16px;
+  color: #f44336;
+  font-size: 14px;
+}
+
+.primary-button {
+  width: 100%;
+  padding: 12px;
+  background-color: rgb(76, 175, 80);
+  color: #fff;
+  font-weight: 500;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 16px;
+}
+
+.primary-button:active {
+  background-color: rgb(46, 125, 50);
+}
+
+.primary-button[disabled] {
+  background-color: #ccc;
+}
+
+/* 验证码显示区域 */
+.verification-code-display {
+  margin-bottom: 16px;
+  padding: 12px;
+  background-color: #f0f8ff;
+  border-radius: 8px;
+  text-align: center;
+  color: #333;
+  font-weight: bold;
+  font-size: 16px;
+  border: 1px dashed #4CAF50;
 } 
